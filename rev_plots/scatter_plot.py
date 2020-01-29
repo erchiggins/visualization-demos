@@ -24,22 +24,16 @@ plot_dates = [dt.datetime.strptime(d,'%m/%d/%Y').date() for d in dates]
 q1_batch_size = [21,17,10,19,13,28,18,21,13,14,23,13,22,19,28,12]
 #q2
 q2_batch_size = [25,16,22,15,13,21,11,21,15,12,21,23,19,15,15,20,18,22,12,18,16,11,23,22]
-#q3
-q3_batch_size = []
-#q4
-q4_batch_size = []
-batch_size = q1_batch_size+q2_batch_size+q3_batch_size+q4_batch_size
+batch_size = q1_batch_size+q2_batch_size
 
 #batch location list construction
 q1_batch_location = ['USF','Reston','CUNY','Reston','USF','Reston','Reston','USF','CUNY','Reston','Reston','USF','USF','USF','Reston','Reston']
 q2_batch_location = ['Reston','Reston','USF','USF','Reston','Reston','USF','Reston','Reston','USF','Reston','USF','WVU','Reston','USF','Reston','USF','WVU','USF','Reston','UTA','USF','Reston','USF']
-q3_batch_location = []
-q4_batch_location = []
-batch_location = q1_batch_location+q2_batch_location+q3_batch_location+q4_batch_location
+batch_location = q1_batch_location+q2_batch_location
 
 #size of markers
 np_batch_size = np.array(batch_size)
-np_batch_size = np_batch_size*10
+np_batch_size = np_batch_size**2
 
 #color of markers by location
 colors = {'Reston':'blue','USF':'green','CUNY':'red','WVU':'yellow','UTA':'orange'}
@@ -48,8 +42,9 @@ batch_colors = [colors[loc] for loc in batch_location]
 #date format
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d/%Y'))
 plt.gca().xaxis.set_major_locator(mdates.DayLocator())
-plt.scatter(plot_dates,batch_size,s=np_batch_size,alpha=0.8,c=batch_colors)
 plt.gcf().autofmt_xdate()
+
+plt.scatter(plot_dates,batch_size,s=np_batch_size,alpha=0.8,c=batch_colors)
 
 plt.title('Batch Sizes In 2018 Q1, Q2')
 plt.xlabel('Batch Start Date')
